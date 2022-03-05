@@ -17,5 +17,5 @@
 |  |  |
 |--|--|
 | NIM | **1941720167** |
-| Nama Lengkap | **Zabiyan Wahyu Setya Putra ** |
+| Nama Lengkap | **Zabiyan Wahyu Setya Putra** |
 | Kelas | TI-3E |
