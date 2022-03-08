@@ -4,7 +4,7 @@ const FormLogin = () => {
     return(
       <div style={{ marginTop: "100px"}}>
       <div className="container">
-      <div className="row justify--content-center">
+      <div className="row justify-content-center">
       <div className="col-md-6">
       <h1 className="text-center p-2">Form Login</h1>
       <div className="card p-4">
