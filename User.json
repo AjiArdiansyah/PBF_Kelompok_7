@@ -1,0 +1,26 @@
+{
+    "user": [
+      {
+        "idUser": 1,
+        "Nama": "aji",
+        "Status": "admin"
+        
+      },
+      {
+        "idUser": 2,
+        "Nama": "aji",
+        "Status": "admin"
+      },
+      {
+        "idUser": 3,
+        "Nama": "aji",
+        "Status": "admin"
+       },
+      {
+        "idUser": 1,
+        "Nama": "aji",
+        "Status": "admin"
+      }
+    ]
+    
+  }

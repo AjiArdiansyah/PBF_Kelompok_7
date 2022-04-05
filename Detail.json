@@ -1,0 +1,37 @@
+{
+    "detail": [
+      {
+        "idFaktur": 1,
+        "tglOrder": "1 januari",
+        "Menu": "1",
+        "Harga": "5000",
+        "Total": "15000"
+
+      },
+      {
+        "idFaktur": 2,
+        "tglOrder": "2 januari",
+        "Menu": "1",
+        "Harga": "5000",
+        "Total": "25000"
+        
+      },
+      {
+        "idFaktur": 3,
+        "tglOrder": "3 januari",
+        "Menu": "1",
+        "Harga": "5000",
+        "Total": "10000"
+        
+       },
+      {
+        "idFaktur": 4,
+        "tglOrder": "4 januari",
+        "Menu": "4",
+        "Harga": "5000",
+        "Total": "15000"
+        
+      }
+    ]
+    
+  }

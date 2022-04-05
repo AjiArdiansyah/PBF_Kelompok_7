@@ -1,0 +1,25 @@
+{
+    "pelanggan": [
+      {
+        "idPelanggan": 1,
+        "nama": "aji",
+        "alamat": "Jl. Soekarno Hatta No. 9 Malang",
+        "hp": "081802023249"
+        
+      },
+      {
+        "idPelanggan": 2,
+        "nama": "aji 2",
+        "alamat": "Jl. Menur No. 9 Surabaya",
+        "hp": "081802023523"
+       
+      },
+      {
+        "idPelanggan": 3,
+        "nama": "Aji Ardiansyah",
+        "alamat": "Bojonegoro",
+        "hp": "085156508873"
+       
+      }
+    ]
+  }
