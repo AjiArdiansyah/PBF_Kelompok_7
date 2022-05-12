@@ -15,7 +15,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 //  <div>
 //  <h1>Component dari Class App</h1>
 //  <List/>
-//  <Footer judul='Halaman Footer' nama='Aji' />
+//  <Footer judul='Halaman Footer' nama='' />
 //  </div>
 //  );
 //  }
@@ -30,6 +30,8 @@ function App() {
                 <Route path="/" component={Front} exact/>
                 <Route path="/home" component={Front} />
                 <Route path="/admin" component={Back} />
+
+                
 
                 
             </Router>
