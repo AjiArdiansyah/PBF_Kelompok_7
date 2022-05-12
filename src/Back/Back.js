@@ -7,7 +7,7 @@ const Back = () => {
     return (
         <>
             <div className="row">
-                <div> <Nav /></div>
+                <div> <Nav /> </div>
             </div>
             <div className="row">
                 <div className="col-4">
@@ -23,7 +23,6 @@ const Back = () => {
                     <Footer />
                 </div>
             </div>
-
         </>
     );
 }

@@ -3,24 +3,32 @@ import { Link, useRouteMatch } from 'react-router-dom';
 
 const Side = () => {
 
-    const { url } = useRouteMatch();
+    const {url} = useRouteMatch();
+
     return (
         <div>
             <div className="card" style={{ width: "18rem" }}>
-                <div className="Card-header">Menu Aplikasi</div>
-                <ul className="list-group" list-group-flush>
+                <div className="card-header">Menu Aplikasi</div>
+                <ul className="list-group list-group-flush">
+
                     <Link to={`${url}/kategori`}>
-                        <li className="list-group-item">Kategori</li></Link>
+                        <li className="list-group-item">Kategori</li>
+                        </Link>
                     <Link to={`${url}/menu`}>
-                        <li className="list-group-item">Menu</li></Link>
+                        <li className="list-group-item">Menu</li>
+                        </Link>
                     <Link to={`${url}/pelanggan`}>
-                        <li className="list-group-item">Pelanggan</li></Link>
+                        <li className="list-group-item">Pelanggan</li>
+                        </Link>
                     <Link to={`${url}/admin-page`}>
-                        <li className="list-group-item">Admin</li></Link>
+                        <li className="list-group-item">Admin</li>
+                        </Link>
                     <Link to={`${url}/order`}>
-                        <li className="list-group-item">Order</li></Link>
+                        <li className="list-group-item">Order</li>
+                        </Link>
                     <Link to={`${url}/order-detail`}>
-                        <li className="list-group-item">Order Detail</li></Link>
+                        <li className="list-group-item">Order Detail</li>
+                        </Link>
                 </ul>
             </div>
         </div>
