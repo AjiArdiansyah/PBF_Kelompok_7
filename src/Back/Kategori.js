@@ -19,6 +19,16 @@ const Kategori = () => {
         fetchData();
     }
 
+    async function hapus(id) {
+        if (window.confirm('yakin akan menghapus?')) {
+            const res = await link.delete('/kategori/'+id);
+        setPesan(res.data.pesan);  
+        }  
+          
+    }
+
+    fetchData();
+
     useEffect(() => {
         fetchData();
 
@@ -85,16 +95,20 @@ let no =1;
                             <th>No</th>
                             <th>Kategori</th>
                             <th>Keterangan</th>
+                            <th>Hapus</th>
                         </tr>
                     </thead>
-                    <tbody>
 
+                    <tbody>
                         {
                             isi.map((val, index) => (
                                 <tr key={index}>
                                     <td>{no++}</td>
                                     <td>{val.kategori}</td>
                                     <td>{val.keterangan}</td>
+                                    <td>
+                                        <button onClick={ () => hapus(val.idkategori)} className="btn btn-danger">Hapus</button>
+                                    </td>
                                 </tr>
                             ))
                         }
