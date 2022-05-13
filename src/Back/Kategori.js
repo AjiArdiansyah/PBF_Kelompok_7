@@ -3,35 +3,37 @@ import { link } from '../Axios/link';
 import { useForm } from 'react-hook-form';
 
 const Kategori = () => {
-    const [isi, setIsi] = useState([])
+    const [isi, setIsi] = useState([]);
+    const [pesan, setPesan] = useState('');
 
     const { register, handleSubmit, reset, errors } = useForm();
 
+    async function fetchData() {
+        const request = await link.get('/kategori');
+        setIsi(request.data);
+    }
+
     function simpan(data) {
-        link.post('/kategori',data).then(res=>console.log(res));
+        link.post('/kategori',data).then(res=>setPesan(res.data.pesan));
         reset();
+        fetchData();
     }
 
     useEffect(() => {
-
-
-        async function fetchData() {
-            const request = await link.get('/kategori');
-            //console.log(request.data);
-            setIsi(request.data);
-
-
-        }
-
         fetchData();
 
     }, []);
 
+let no =1;
 
     return (
         <div>
             <div className="row">
                 <h2>Data Kategori</h2>
+            </div>
+            <div className="row">
+                <p>{pesan}</p>
+
             </div>
             <div className="row">
                 <div className="col-4">
@@ -53,7 +55,7 @@ const Kategori = () => {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="keterangan" className="form-label">
-                                Kategori
+                                Keterangan
                             </label>
                             <input
                                 type="text"
@@ -80,6 +82,7 @@ const Kategori = () => {
                 <table className="table mt-4">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Kategori</th>
                             <th>Keterangan</th>
                         </tr>
@@ -89,6 +92,7 @@ const Kategori = () => {
                         {
                             isi.map((val, index) => (
                                 <tr key={index}>
+                                    <td>{no++}</td>
                                     <td>{val.kategori}</td>
                                     <td>{val.keterangan}</td>
                                 </tr>
