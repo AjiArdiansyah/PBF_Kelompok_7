@@ -16,23 +16,29 @@ const Kategori = () => {
     }
 
     function simpan(data) {
-        link.post('/kategori',data).then(res=>setPesan(res.data.pesan));
+        if (pilihan) {
+            link.post('/kategori', data).then(res => setPesan(res.data.pesan));
+        } else {
+            link.put('/kategori/' + idkategori, data).then(res => setPesan(res.data.pesan));
+            setPilihan(true);
+        }
+
         reset();
         fetchData();
     }
 
     async function hapus(id) {
         if (window.confirm('yakin akan menghapus?')) {
-            const res = await link.delete('/kategori/'+id);
-        setPesan(res.data.pesan);  
-        }  
-          
+            const res = await link.delete('/kategori/' + id);
+            setPesan(res.data.pesan);
+        }
+
     }
 
     async function showData(id) {
-        const res = await link.get('/kategori/'+id);
-        setValue('kategori',res.data[0].kategori);
-        setValue('keterangan',res.data[0].keterangan);
+        const res = await link.get('/kategori/' + id);
+        setValue('kategori', res.data[0].kategori);
+        setValue('keterangan', res.data[0].keterangan);
         setIdkategori(res.data[0].idkategori);
         setPilihan(false);
     }
@@ -44,7 +50,7 @@ const Kategori = () => {
 
     }, []);
 
-let no =1;
+    let no = 1;
 
     return (
         <div>
@@ -69,7 +75,7 @@ let no =1;
                                 className="form-control"
                                 name="kategori"
                                 placeholder="kategori"
-                                ref={register({required:true})} 
+                                ref={register({ required: true })}
                             />
                             {errors.kategori && "Kategori harus di isi !"}
                         </div>
@@ -118,10 +124,10 @@ let no =1;
                                     <td>{val.kategori}</td>
                                     <td>{val.keterangan}</td>
                                     <td>
-                                        <button onClick={ () => hapus(val.idkategori)} className="btn btn-danger">Hapus</button>
+                                        <button onClick={() => hapus(val.idkategori)} className="btn btn-danger">Hapus</button>
                                     </td>
                                     <td>
-                                        <button onClick={ () => showData(val.idkategori)} className="btn btn-warning">Ubah</button>
+                                        <button onClick={() => showData(val.idkategori)} className="btn btn-warning">Ubah</button>
                                     </td>
                                 </tr>
                             ))
