@@ -5,8 +5,10 @@ import { useForm } from 'react-hook-form';
 const Kategori = () => {
     const [isi, setIsi] = useState([]);
     const [pesan, setPesan] = useState('');
+    const [idkategori, setIdkategori] = useState('');
+    const [pilihan, setPilihan] = useState(true);
 
-    const { register, handleSubmit, reset, errors } = useForm();
+    const { register, handleSubmit, reset, errors, setValue } = useForm();
 
     async function fetchData() {
         const request = await link.get('/kategori');
@@ -25,6 +27,14 @@ const Kategori = () => {
         setPesan(res.data.pesan);  
         }  
           
+    }
+
+    async function showData(id) {
+        const res = await link.get('/kategori/'+id);
+        setValue('kategori',res.data[0].kategori);
+        setValue('keterangan',res.data[0].keterangan);
+        setIdkategori(res.data[0].idkategori);
+        setPilihan(false);
     }
 
     fetchData();
@@ -96,6 +106,7 @@ let no =1;
                             <th>Kategori</th>
                             <th>Keterangan</th>
                             <th>Hapus</th>
+                            <th>Ubah</th>
                         </tr>
                     </thead>
 
@@ -108,6 +119,9 @@ let no =1;
                                     <td>{val.keterangan}</td>
                                     <td>
                                         <button onClick={ () => hapus(val.idkategori)} className="btn btn-danger">Hapus</button>
+                                    </td>
+                                    <td>
+                                        <button onClick={ () => showData(val.idkategori)} className="btn btn-warning">Ubah</button>
                                     </td>
                                 </tr>
                             ))
