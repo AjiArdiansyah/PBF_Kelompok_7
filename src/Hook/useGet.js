@@ -7,17 +7,21 @@ const useGet = (url) => {
 
 
     useEffect(() => {
-        async function fetchData() {
-            const request = await link.get(url);
-            setIsi(request.data);
-        }
 
-        fetchData();
+        let ambil = true;
+        async function fetchData() {
+            const res = await link.get(url);
+            if (ambil) {
+                setIsi(res.data);
+            }
+        }
+        fetchData()
+        return () => {
+            ambil = false;
+        };
     }, [isi]);
 
-
-
     return [isi];
-}
+};
 
 export default useGet;
