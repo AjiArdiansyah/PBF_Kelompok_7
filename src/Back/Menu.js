@@ -9,6 +9,9 @@ const Menu = () => {
     const [isi] = useGet('/menu');
     const { hapus, pesan, setPesan } = useDelete('/menu/');
     const [kategori, setKategori] = useState([]);
+    const [gambar, setGambar] = useState([]);
+    const [idkategori, setIdkategori] = useState([]);
+
 
     const { register, handleSubmit, reset, errors, setValue } = useForm();
 
@@ -36,7 +39,15 @@ const Menu = () => {
 
         link.post('/menu', formData).then(res => setPesan(res.data.pesan));
         reset();
+    }
 
+    async function showData(id) {
+        const res = await link.get('/menu/' + id);
+        //console.log(res.data);
+        setValue('menu', res.data[0].menu);
+        setValue('harga', res.data[0].harga);
+        setGambar(<img src={res.data[0].gambar} alt="" height="200" width="250" />);
+        setIdkategori(res.data[0].idkategori);
     }
 
     let no = 1;
@@ -63,11 +74,14 @@ const Menu = () => {
                             </label>
                             <select name="idkategori" ref={register} className="form-control">
                                 {
-                                    kategori.map((val, index) => (
-                                        <option key={index} value={val.idkategori}>{val.kategori}</option>
-                                    ))
-                                }
-
+                                    kategori.map((val, index) => val.idkategori == idkategori ? 
+                                    ( <option key={index} selected value={val.idkategori}>
+                                        {val.kategori}</option>
+                                        ) : ( 
+                                        <option key={index} value={val.idkategori}>
+                                            {val.kategori}
+                                        </option>
+                                        ))}
                             </select>
                         </div>
 
@@ -119,6 +133,10 @@ const Menu = () => {
                     </form>
                 </div>
 
+                <div className="col-4">
+                    {gambar}
+                </div>
+
             </div>
 
 
@@ -132,6 +150,7 @@ const Menu = () => {
                             <th>Gambar</th>
                             <th>Harga</th>
                             <th>Hapus</th>
+                            <th>Ubah</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -147,6 +166,12 @@ const Menu = () => {
                                         onClick={
                                             () => hapus(val.idmenu)
                                         }>Hapus</button>
+                                </td>
+                                <td>
+                                    <button className="btn btn-warning"
+                                        onClick={
+                                            () => showData(val.idmenu)
+                                        }>Ubah</button>
                                 </td>
                             </tr>
                         ))}

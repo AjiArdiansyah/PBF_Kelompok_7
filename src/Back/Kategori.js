@@ -107,6 +107,7 @@ const Kategori = () => {
                             <th>Keterangan</th>
                             <th>Hapus</th>
                             <th>Ubah</th>
+                            
                         </tr>
                     </thead>
 
