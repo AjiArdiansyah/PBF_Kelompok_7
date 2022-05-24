@@ -32,6 +32,10 @@ const Content = () => {
         tampil = <Pelanggan></Pelanggan>
     }
 
+    if (isi==='order'){
+        tampil = <Order></Order>
+    }
+
     if (isi==='detail'){
         tampil = <Detail></Detail>
     }

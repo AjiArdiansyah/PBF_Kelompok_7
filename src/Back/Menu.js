@@ -11,6 +11,8 @@ const Menu = () => {
     const [kategori, setKategori] = useState([]);
     const [gambar, setGambar] = useState([]);
     const [idkategori, setIdkategori] = useState([]);
+    const [pilihan, setPilihan] = useState(true);
+    const [idmenu, setIdmenu] = useState('');
 
 
     const { register, handleSubmit, reset, errors, setValue } = useForm();
@@ -37,7 +39,15 @@ const Menu = () => {
         formData.append('harga', data.harga);
         formData.append('gambar', data.gambar[0]);
 
-        link.post('/menu', formData).then(res => setPesan(res.data.pesan));
+        if (pilihan) {
+            link.post('/menu', formData).then(res => setPesan(res.data.pesan));
+
+        } else {
+            link.post('/menu/' + idmenu, formData).then(res => setPesan(res.data.pesan));
+            setPilihan(true);
+        }
+
+
         reset();
     }
 
@@ -48,6 +58,8 @@ const Menu = () => {
         setValue('harga', res.data[0].harga);
         setGambar(<img src={res.data[0].gambar} alt="" height="200" width="250" />);
         setIdkategori(res.data[0].idkategori);
+        setIdmenu(res.data[0].idmenu);
+        setPilihan(false);
     }
 
     let no = 1;
@@ -74,13 +86,13 @@ const Menu = () => {
                             </label>
                             <select name="idkategori" ref={register} className="form-control">
                                 {
-                                    kategori.map((val, index) => val.idkategori == idkategori ? 
-                                    ( <option key={index} selected value={val.idkategori}>
-                                        {val.kategori}</option>
-                                        ) : ( 
-                                        <option key={index} value={val.idkategori}>
-                                            {val.kategori}
-                                        </option>
+                                    kategori.map((val, index) => val.idkategori === idkategori ?
+                                        (<option key={index} selected value={val.idkategori}>
+                                            {val.kategori}</option>
+                                        ) : (
+                                            <option key={index} value={val.idkategori}>
+                                                {val.kategori}
+                                            </option>
                                         ))}
                             </select>
                         </div>
