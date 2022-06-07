@@ -20,14 +20,14 @@ const Side = () => {
                     <Link to={`${url}/pelanggan`}>
                         <li className="list-group-item">Pelanggan</li>
                         </Link>
-                    <Link to={`${url}/admin-page`}>
-                        <li className="list-group-item">Admin</li>
-                        </Link>
                     <Link to={`${url}/order`}>
                         <li className="list-group-item">Order</li>
                         </Link>
-                    <Link to={`${url}/order-detail`}>
+                    <Link to={`${url}/detail`}>
                         <li className="list-group-item">Order Detail</li>
+                        </Link>
+                        <Link to={`${url}/admin-page`}>
+                        <li className="list-group-item">Admin</li>
                         </Link>
                 </ul>
             </div>

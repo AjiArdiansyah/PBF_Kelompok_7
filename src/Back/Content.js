@@ -24,14 +24,13 @@ const Content = () => {
         tampil = <Menu></Menu>
     }
 
-    if (isi==='order'){
-        tampil = <Order></Order>
-    }
-
     if (isi==='pelanggan'){
         tampil = <Pelanggan></Pelanggan>
     }
 
+    if (isi==='order'){
+        tampil = <Order></Order>
+    }
   
     if (isi==='detail'){
         tampil = <Detail></Detail>
