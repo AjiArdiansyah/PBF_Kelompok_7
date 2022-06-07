@@ -1,30 +1,117 @@
 import React, { useState } from "react";
 import useGet from "../Hook/useGet";
 import { useForm } from 'react-hook-form';
+import Modal from 'react-modal';
 
 
+Modal.setAppElement('#root');
 const Order = () => {
 
-    let today = new Date().toISOString().slice(0,10);
-    
+    let today = new Date().toISOString().slice(0, 10);
+
+    const [mopen, setMopen] = useState(false)
+    const [total, setTotal] = useState(0)
+    const [pelanggan, setPelanggan] = useState('')
+
 
     const [awal, setawal] = useState('2022-05-21');
     const [akhir, setAkhir] = useState(today);
 
-    const { register, handleSubmit } = useForm();
-
-    const [isi] = useGet(`/order/${awal}/${akhir}`);
+    const { register, handleSubmit, setValue } = useForm();
 
     function cari(data) {
         setawal(data.tawal);
         setAkhir(data.takhir);
-        
+
+    }
+
+    const [isi] = useGet(`/order/${awal}/${akhir}`);
+
+    function filterData(id) {
+        const data = isi.filter((val) => (val.idorder === id))
+        setPelanggan(data[0].pelanggan);
+        setTotal(data[0].total);
+        setMopen(true);
+    }
+
+    function isiForm() {
+        setValue("total", total)
     }
 
     let no = 1;
 
     return (
         <div>
+            <Modal isOpen={mopen} onRequestClose={() => setMopen(false)}
+            onAfterOpen={isiForm} 
+            style={
+                {
+                    overlay: {
+                        background: "transparent !important",
+                    },
+                    content: {
+                        top: '50%',
+                        left: '50%',
+                        right: 'auto',
+                        bottom: 'auto',
+                        marginRight: '-50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '40%'
+                    },
+                }}
+            >
+                <div className="row">
+                    <h2>Pembayaran Order {pelanggan} </h2>
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <form>
+                            <div className="mb-3">
+                                <label htmlFor="total" className="form-label">
+                                    Total
+                                </label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    name="total"
+                                    placeholder="total"
+                                    ref={register({ required: true })}
+                                />
+
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="bayar" className="form-label">
+                                    Bayar
+                                </label>
+                                <input
+                                    type="number"
+                                    className="form-control"
+                                    name="bayar"
+                                    placeholder="bayar"
+                                    ref={register}
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <input
+                                    type="submit"
+                                    className="btn btn-danger mr-2"
+                                    name="batal"
+                                    value="Batal"
+                                    onClick={() => setMopen(false)}
+                                />
+
+                                <input
+                                    type="submit"
+                                    className="btn btn-primary"
+                                    name="submit"
+                                    value="Bayar"
+                                />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </Modal>
             <div className="row">
                 <h2>Data Order</h2>
             </div>
@@ -53,12 +140,12 @@ const Order = () => {
                         />
                     </div>
                     <div className="mb-3">
-                            <input
-                                type="submit"
-                                className="btn btn-primary"
-                                name="submit"
-                            />
-                        </div>
+                        <input
+                            type="submit"
+                            className="btn btn-primary"
+                            name="submit"
+                        />
+                    </div>
                 </form>
             </div>
             <div className="row">
@@ -86,7 +173,7 @@ const Order = () => {
                                         <td>{val.bayar}</td>
                                         <td>{val.kembali}</td>
                                         <td>{
-                                            val.status === 0 ? <button className="btn btn-danger">Belum Bayar</button> : <p>Lunas</p>
+                                            val.status === 0 ? <button className="btn btn-danger" onClick={() => filterData(val.idorder)}>Belum Bayar</button> : <p>Lunas</p>
                                         }</td>
                                     </tr>
                                 ))
