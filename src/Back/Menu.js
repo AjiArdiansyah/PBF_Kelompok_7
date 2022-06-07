@@ -34,16 +34,16 @@ const Menu = () => {
 
     function simpan(data) {
         const formData = new FormData();
-        formData.append('idkategori', data.idkategori);
-        formData.append('menu', data.menu);
-        formData.append('harga', data.harga);
-        formData.append('gambar', data.gambar[0]);
+        formData.append("idkategori", data.idkategori);
+        formData.append("menu", data.menu);
+        formData.append("harga", data.harga);
+        formData.append("gambar", data.gambar[0]);
 
         if (pilihan) {
-            link.post('/menu', formData).then(res => setPesan(res.data.pesan));
+            link.post("/menu", formData).then(res => setPesan(res.data.pesan));
 
         } else {
-            link.post('/menu/' + idmenu, formData).then(res => setPesan(res.data.pesan));
+            link.post("/menu/" + idmenu, formData).then(res => setPesan(res.data.pesan));
             setPilihan(true);
         }
 

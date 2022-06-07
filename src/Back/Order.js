@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useGet from "../Hook/useGet";
 import { useForm } from 'react-hook-form';
 import Modal from 'react-modal';
+import { link } from '../Axios/link';
 
 
 Modal.setAppElement('#root');
@@ -9,15 +10,16 @@ const Order = () => {
 
     let today = new Date().toISOString().slice(0, 10);
 
-    const [mopen, setMopen] = useState(false)
-    const [total, setTotal] = useState(0)
-    const [pelanggan, setPelanggan] = useState('')
+    const [mopen, setMopen] = useState(false);
+    const [total, setTotal] = useState(0);
+    const [pelanggan, setPelanggan] = useState("");
+    const [idorder, setIdorder] = useState("");
 
 
     const [awal, setawal] = useState('2022-05-21');
     const [akhir, setAkhir] = useState(today);
 
-    const { register, handleSubmit, setValue } = useForm();
+    const { register, handleSubmit, setValue, errors } = useForm();
 
     function cari(data) {
         setawal(data.tawal);
@@ -31,11 +33,22 @@ const Order = () => {
         const data = isi.filter((val) => (val.idorder === id))
         setPelanggan(data[0].pelanggan);
         setTotal(data[0].total);
+        setIdorder(data[0].idorder);
         setMopen(true);
     }
 
     function isiForm() {
         setValue("total", total)
+    }
+
+    async function simpan(data) {
+        let hasil = {
+            bayar:data.bayar,
+            kembali:data.bayar - data.total,
+            status: 1
+        }
+        const res = await  link.put("/order/"+idorder, hasil);
+        setMopen(false)
     }
 
     let no = 1;
@@ -65,7 +78,7 @@ const Order = () => {
                 </div>
                 <div className="row">
                     <div className="col">
-                        <form>
+                        <form onSubmit={handleSubmit(simpan)}>
                             <div className="mb-3">
                                 <label htmlFor="total" className="form-label">
                                     Total
@@ -88,8 +101,9 @@ const Order = () => {
                                     className="form-control"
                                     name="bayar"
                                     placeholder="bayar"
-                                    ref={register}
+                                    ref={register({required:true, min:total})}
                                 />
+                                {errors.bayar && "Pembayaran Kurang !"}
                             </div>
                             <div className="mb-3">
                                 <input

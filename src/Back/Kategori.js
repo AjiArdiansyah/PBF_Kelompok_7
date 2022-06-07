@@ -17,9 +17,9 @@ const Kategori = () => {
 
     function simpan(data) {
         if (pilihan) {
-            link.post('/kategori', data).then(res => setPesan(res.data.pesan));
+            link.post("/kategori", data).then(res => setPesan(res.data.pesan));
         } else {
-            link.put('/kategori/' + idkategori, data).then(res => setPesan(res.data.pesan));
+            link.put("/kategori/" + idkategori, data).then(res => setPesan(res.data.pesan));
             setPilihan(true);
         }
 
