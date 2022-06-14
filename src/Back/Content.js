@@ -5,6 +5,7 @@ import Menu from "./Menu";
 import Order from "./Order"
 import Pelanggan from "./Pelanggan";
 import Detail from "./Detail";
+import User from "./User";
 
 
 const Content = () => {
@@ -34,6 +35,10 @@ const Content = () => {
   
     if (isi==='detail'){
         tampil = <Detail></Detail>
+    }
+
+    if (isi==='user'){
+        tampil = <User></User>
     }
 
     

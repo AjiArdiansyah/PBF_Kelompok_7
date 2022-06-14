@@ -26,8 +26,8 @@ const Side = () => {
                     <Link to={`${url}/detail`}>
                         <li className="list-group-item">Order Detail</li>
                         </Link>
-                        <Link to={`${url}/admin-page`}>
-                        <li className="list-group-item">Admin</li>
+                    <Link to={`${url}/user`}>
+                        <li className="list-group-item">User Admin</li>
                         </Link>
                 </ul>
             </div>

@@ -6,18 +6,19 @@ const Detail = () => {
 
     let today = new Date().toISOString().slice(0, 10);
 
-    const { register, handleSubmit, } = useForm();
+    const { register, handleSubmit } = useForm();
 
-    const [awal, setawal] = useState('2022-05-21');
+    const [awal, setawal] = useState(today);
     const [akhir, setAkhir] = useState(today);
 
     function cari(data) {
         setawal(data.tawal);
         setAkhir(data.takhir);
-
     }
 
     const [isi] = useGet(`/detail/${awal}/${akhir}`);
+    
+    let no = 1;
 
     return (
 
@@ -77,9 +78,9 @@ const Detail = () => {
                         </thead>
                         <tbody>
                             {
-                                isi.map((val, index) => (
+                                isi.map( (val, index) => (
                                     <tr key={index}>
-                                        <td>No</td>
+                                        <td>{no++}</td>
                                         <td>{val.idorder}</td>
                                         <td>{val.tglorder}</td>
                                         <td>{val.menu}</td>
