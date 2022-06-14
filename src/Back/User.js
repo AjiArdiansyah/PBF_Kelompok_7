@@ -15,6 +15,24 @@ const User = () => {
         setMopen(true);
     }
 
+    async function status(id) {
+        const data = isi.filter( (val)=> val.id === id);
+
+        let stat = 0;
+        if (data[0].status === 1) {
+            stat = 0;
+        }else{
+            stat = 1;
+        }
+
+        let kirim = {
+            status : stat
+        }
+
+        const res = await link.put('/user/'+id,kirim)
+        
+    }
+
     async function simpan(data) {
         let user = {
             email : data.email,
@@ -136,9 +154,20 @@ const User = () => {
                                         <td>{no++}</td>
                                         <td>{val.email}</td>
                                         <td>{val.level}</td>
-                                        <td>{
-                                            val.status === 1 ? <input className="btn btn-success" type="submit" value="AKTIF" /> : <input className="btn btn-danger" type="submit" value="BANNED" />
-                                        }</td>
+                                        <td>{val.status === 1 ? ( 
+                                        <input className="btn btn-success"
+                                         type="submit" 
+                                         value="AKTIF"
+                                         onClick={ ()=>status(val.id) } 
+                                         /> 
+                                        ) : ( 
+                                        <input className="btn btn-danger"
+                                         type="submit" 
+                                         value="BANNED"
+                                         onClick={ ()=>status(val.id) } 
+                                          />
+                                        )}
+                                        </td>
                                     </tr>
                                 ))
                             }
