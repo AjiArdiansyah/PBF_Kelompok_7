@@ -5,8 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //import List from './List';
 import Front from './Front/Front';
 import Back from './Back/Back';
+import Login from './Back/Login';
 import './index.css';
-import Nav from './Front/Nav';
+//import Nav from './Front/Nav';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // class App extends Component {
@@ -30,10 +31,7 @@ function App() {
                 <Route path="/" component={Front} exact/>
                 <Route path="/home" component={Front} />
                 <Route path="/admin" component={Back} />
-
-                
-
-                
+                <Route path="/login" component={Login} />    
             </Router>
 
         </div>
