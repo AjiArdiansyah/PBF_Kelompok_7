@@ -1,6 +1,7 @@
 import React from "react";
 import { link } from '../Axios/link';
 import { useForm } from 'react-hook-form';
+//import useGet from "../Hook/useGet";
 
 const Login = () => {
 
@@ -8,9 +9,9 @@ const Login = () => {
 
     const { register, handleSubmit, reset } = useForm();
 
-     async function simpan(data) {
+     async function login(data) {
 
-        const res = link = await link.post("login",data);
+        const res = await link.post('/login',data);
        console.log(res);
 
         reset();
@@ -19,7 +20,7 @@ const Login = () => {
         <div>
             <div className="row mt-5">
                 <div className="mx-auto col-4">
-                    <form onSubmit={handleSubmit(simpan)}>
+                    <form onSubmit={handleSubmit(login)}>
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label">
                                 Email address
